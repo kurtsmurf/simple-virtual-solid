@@ -1,0 +1,28 @@
+.zoomDemo {
+    // clamp width and make it scroll
+    .outer {
+        max-width: 100vw;
+        overflow: auto;
+    }
+    
+    .inner {
+        background: linear-gradient(
+            0.25turn,
+            hsl(0deg, 50%, 50%),
+            hsl(90deg, 50%, 50%),
+            hsl(180deg, 50%, 50%),
+            hsl(270deg, 50%, 50%),
+            hsl(360deg, 50%, 50%),
+        );
+        height: 50px;
+        width: var(--content-width);
+        overflow: hidden;
+    }
+    
+    .mid {
+        height: 100%;
+        background: #FFF8;
+        width: 2%;
+        translate: calc(var(--content-width) / 2 - 50%);
+    }
+}
