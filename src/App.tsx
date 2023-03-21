@@ -9,6 +9,7 @@ const App = () => (
 
 const ZoomDemo = () => {
   const ZOOM_FACTOR = 1.1;
+
   let outerRef: HTMLDivElement;
   let innerRef: HTMLDivElement;
 
@@ -30,11 +31,25 @@ const ZoomDemo = () => {
     outerRef.scrollLeft = nextScrollLeft;
   };
 
+  /**
+   * TODO: preserve cursor position relative to content during zoom 
+   */
+  const wheelZoom = (e: WheelEvent) => {
+    if (!e.ctrlKey && !e.metaKey) return;
+    e.preventDefault();
+    const delta = e.deltaX + e.deltaY;
+    if (delta < 0) {
+      zoomOut();
+    } else if (delta > 0) {
+      zoomIn();
+    }
+  }
+
   return (
     <section class={style.zoomDemo}>
       <button onClick={zoomIn}>zoom in</button>
       <button onClick={zoomOut}>zoom out</button>
-      <div class={style.outer} ref={outerRef}>
+      <div class={style.outer} ref={outerRef} onWheel={wheelZoom}>
         <div
           class={style.inner}
           ref={innerRef}
